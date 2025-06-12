@@ -408,7 +408,7 @@ export default function Home() {
           </div>
           
           <p className="text-xl text-gray-400 mb-16 leading-relaxed max-w-3xl mx-auto font-light">
-            Full-Stack Engineer specializing in scalable architectures, distributed systems, and AI integration. 
+            Full-Stack Engineer specializing in frontend architecture, distributed systems, and AI integration. 
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
