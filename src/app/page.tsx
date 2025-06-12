@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Menu, X, ChevronDown, Calendar, MapPin, Award, Code, Brain, Database, Users } from 'lucide-react';
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [showBlogPost, setShowBlogPost] = useState(null);
+  const [showBlogPost, setShowBlogPost] = useState<string | null>(null);
 
   // Smooth scrolling navigation
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -45,12 +46,12 @@ export default function Home() {
       location: "Redmond, WA",
       period: "Jul 2023 – Present",
       achievements: [
-        "AI Integration: Integrated Generative AI into Microsoft's internal authoring platform, boosting content creation efficiency by 99% across 2B+ support pages",
+        "AI Integration: Integrated Generative AI into Microsoft&apos;s internal authoring platform, boosting content creation efficiency by 99% across 2B+ support pages",
         "Frontend Architecture: Modernized frontend with React, Redux, and Fluent UI, migrating legacy systems while ensuring accessibility and performance standards",
         "Schema-Driven Development: Built form-based UI with JSONForms, reducing authoring time by 70% and error rates by 90%",
         "High-Scale Backend Systems: Engineered secure APIs using C#, .NET, Azure Functions, and CosmosDB—serving 15B+ monthly requests with 99.997% uptime",
         "Real-Time Data Pipelines: Led development of metadata pipelines providing system insights for 30+ partner teams, enabling 100% content freshness visibility",
-        "DevOps & Infrastructure: Designed secure local development infrastructure with isolated Azure subscriptions and token-based authentication"
+        "DevOps &amp; Infrastructure: Designed secure local development infrastructure with isolated Azure subscriptions and token-based authentication"
       ]
     },
     {
@@ -59,7 +60,7 @@ export default function Home() {
       location: "Redmond, WA",
       period: "May – Aug 2022",
       achievements: [
-        "Built TypeScript + React web app using Microsoft's M365 extensibility SDK, enabling code portability across Teams hosts with 1M+ monthly active users",
+        "Built TypeScript + React web app using Microsoft&apos;s M365 extensibility SDK, enabling code portability across Teams hosts with 1M+ monthly active users",
         "Created cross-host functionality with shared logic for SSO authentication, calling, and messaging features",
         "Published open-source sample application using official Microsoft Teams JS SDK on GitHub"
       ]
@@ -70,7 +71,7 @@ export default function Home() {
       location: "Boston, MA",
       period: "May 2021 – May 2022",
       achievements: [
-        "Developed ML models predicting compound solubility from cheminformatics datasets (10,000+ molecules) with R² greater than 0.95  accuracy",
+        "Developed ML models predicting compound solubility from cheminformatics datasets (10,000+ molecules) with R² greater than 0.95 accuracy",
         "Implemented feature selection using Lasso regression to identify impactful chemical descriptors and reduce model complexity",
         "Designed modular ML pipeline with cross-validation, hyperparameter tuning, and comprehensive performance metrics",
         "Collaborated with research team to integrate predictive models into computational chemistry workflows"
@@ -84,7 +85,7 @@ export default function Home() {
       description: "A React web application that combines computer vision and NLP to help users identify plants and receive personalized care guidance. The app features dual AI integration with offline fallback capabilities.",
       details: [
         "Smart Plant Identification: Integrated OpenAI Vision API and PlantNet API with fallback logic, achieving 90%+ accuracy in plant identification",
-        "AI-Powered Chat Assistant: Implemented conversational AI using OpenAI's GPT-4 for personalized plant care advice and problem diagnosis",
+        "AI-Powered Chat Assistant: Implemented conversational AI using OpenAI&apos;s GPT-4 for personalized plant care advice and problem diagnosis",
         "Robust Architecture: Built comprehensive offline mode with local plant database, ensuring 100% functionality even when AI services are unavailable",
         "User Experience: Designed intuitive interface with real-time image analysis, confidence scoring, and detailed care instructions",
         "Performance Optimization: Implemented retry logic, error handling, and graceful degradation for enterprise-level reliability"
@@ -107,7 +108,7 @@ export default function Home() {
       description: "Developed CNN and RNN models for breast cancer tissue analysis, enabling automated identification of tumor characteristics in TNBC research.",
       details: [
         "Implemented U-Net and FCN architectures for nuclei segmentation in histopathological images",
-        "Achieved greater than  90% accuracy in identifying cancer nuclei morphology and characteristics",
+        "Achieved greater than 90% accuracy in identifying cancer nuclei morphology and characteristics",
         "Built comprehensive data augmentation pipeline for medical imaging robustness",
         "Designed custom loss functions combining Dice loss and boundary loss for precise segmentation"
       ],
@@ -119,7 +120,7 @@ export default function Home() {
       details: [
         "Implemented Kernel Ridge Regression with custom kernel functions for molecular property prediction",
         "Utilized Gaussian Processes for uncertainty quantification in energy surface mapping",
-        "Leveraged PyTorch's automatic differentiation for gradient-based optimization",
+        "Leveraged PyTorch&apos;s automatic differentiation for gradient-based optimization",
         "Achieved high accuracy in predicting molecular configurations and energy landscapes"
       ],
       tech: ["Python", "PyTorch", "Machine Learning", "Gaussian Processes", "Quantum Chemistry"]
@@ -166,7 +167,7 @@ export default function Home() {
       id: "hartree-fock",
       title: "Building a Hartree-Fock Solver: From Quantum Theory to Python Code",
       date: "December 2024",
-      excerpt: "A deep dive into implementing quantum chemistry's fundamental algorithm and its real-world applications in molecular modeling.",
+      excerpt: "A deep dive into implementing quantum chemistry&apos;s fundamental algorithm and its real-world applications in molecular modeling.",
       tags: ["Quantum Chemistry", "Python", "Scientific Computing"]
     },
     {
@@ -178,8 +179,8 @@ export default function Home() {
     }
   ];
 
-  const BlogPost = ({ postId, onClose }) => {
-    const blogContent = {
+  const BlogPost = ({ postId, onClose }: { postId: string; onClose: () => void }) => {
+    const blogContent: Record<string, { title: string; content: React.ReactElement }> = {
       "hartree-fock": {
         title: "Building a Hartree-Fock Solver: From Quantum Theory to Python Code",
         content: (
@@ -352,18 +353,15 @@ export default function Home() {
         <div className="text-center max-w-4xl mx-auto">
           <div className="mb-8">
             <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 p-1">
-              <img 
-                src="/profile.jpeg" 
-                alt="Ananya Barthakur" 
-                className="w-full h-full rounded-full object-cover bg-slate-800"
-                onError={(e) => {
-                  // Fallback to initials if image doesn't load
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'flex';
+              <div 
+                className="w-full h-full rounded-full bg-slate-800 bg-cover bg-center flex items-center justify-center text-4xl font-bold"
+                style={{
+                  backgroundImage: 'url(/profile.jpeg)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
                 }}
-              />
-              <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center" style={{display: 'none'}}>
-                <span className="text-4xl font-bold">AB</span>
+              >
+                AB
               </div>
             </div>
           </div>
@@ -421,7 +419,7 @@ export default function Home() {
           </h2>
           
           <p className="text-lg text-gray-300 leading-relaxed">
-            Hi! I'm Ananya, a full-stack software engineer with 2+ years of experience at Microsoft, specializing in scalable web applications and AI integration. I have a passion for creating solutions that bridge the gap between complex technology and intuitive user experiences. My expertise spans from developing high-performance backend systems serving billions of requests to crafting engaging frontend interfaces and integrating cutting-edge AI capabilities.
+            Hi! I&apos;m Ananya, a full-stack software engineer with 2+ years of experience at Microsoft, specializing in scalable web applications and AI integration. I have a passion for creating solutions that bridge the gap between complex technology and intuitive user experiences. My expertise spans from developing high-performance backend systems serving billions of requests to crafting engaging frontend interfaces and integrating cutting-edge AI capabilities.
           </p>
         </div>
       </section>
@@ -545,71 +543,71 @@ export default function Home() {
       </section>
 
       {/* Recommendations Section */}
-<section id="recommendations" className="py-20 px-4">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-      <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-        Recommendations
-      </span>
-    </h2>
-    
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      {[
-        {
-          name: "Denise Architetto",
-          role: "Principal Engineering Group Manager (Director M365)",
-          company: "Microsoft",
-          text: "Ananya is an incredibly bright and driven software engineer with immense potential. From the moment she joined the team, she impressed everyone with how quickly she picked up new technologies and ramped up on a complex domain. Her ability to learn fast, adapt to new challenges, and seek out feedback makes her a standout engineer. Ananya has shown strong capability across both front-end and back-end engineering, demonstrating versatility and a willingness to take on whatever the team needed. She consistently approached her work with thoughtfulness and curiosity—asking insightful questions when working with product managers to ensure a deep understanding of requirements and a clear path to execution. Beyond her technical skills, Ananya is a culture leader. She actively planned team outings and played a key role in building a positive, inclusive, and connected team environment. Her energy, initiative, and focus on team morale made a lasting impact. Ananya is self-motivated, career-focused, and a natural collaborator. I’m excited to see where her career takes her and highly recommend her to any team looking for a talented, adaptable, and inspiring engineer.",
-          date: "2025"
-        },
-        {
-          name: "Hepcibha Addakula",
-          role: "Principal Engineering Manager", 
-          company: "Microsoft",
-          text: "Working with Ananya has been an absolute pleasure. A fresh breath of energy on the team, she brings curiosity, focus, and unwavering commitment to everything she does. From quickly ramping up on complex projects to leading inclusive team events as part of the morale committee, Ananya consistently delivers with impact. She even mentored an intern gracefully while staying on top of her own commitments. Ananya shows strong ownership across initiatives and is always eager to learn from others, embracing diverse perspectives with respect. Even under challenging conditions, she meets deadlines with urgency and grace. A fantastic teammate and a rising star!",
-          date: "2025"
-        },
-        {
-          name: "Jayalakshmi Karanam",
-          role: "Principal Software Engineer ",
-          company: "Microsoft", 
-          text: "Collaborating with Ananya has been a truly rewarding experience. She is curious and determined. Her insightful questions regularly uncover blind spots, highlight opportunities for improvement, and bring fresh perspectives that challenge established ways of thinking in a productive and thoughtful manner. Ananya swiftly mastered Azure Data Factory and seamlessly took over my responsibilities in my absence, demonstrating exceptional ownership and adaptability. Her technical proficiency, willingness to learn, and strong problem-solving skills make her a dependable and highly effective team member. Without hesitation, I wholeheartedly recommend Ananya for a software engineer position. She would be an invaluable asset to any organization.",
-          date: "2025"
-        }
-      ].map((rec, index) => (
-        <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105">
-          <div className="mb-4">
-            <div className="flex items-start justify-between mb-2">
-              <h3 className="text-lg font-semibold text-purple-400">{rec.name}</h3>
-              <span className="text-sm text-gray-400">{rec.date}</span>
-            </div>
-            <p className="text-sm text-gray-300 mb-1">{rec.role}</p>
-            <p className="text-sm text-purple-300">{rec.company}</p>
+      <section id="recommendations" className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Recommendations
+            </span>
+          </h2>
+          
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                name: "Denise Architetto",
+                role: "Principal Engineering Group Manager (Director M365)",
+                company: "Microsoft",
+                text: "Ananya is an incredibly bright and driven software engineer with immense potential. From the moment she joined the team, she impressed everyone with how quickly she picked up new technologies and ramped up on a complex domain. Her ability to learn fast, adapt to new challenges, and seek out feedback makes her a standout engineer. Ananya has shown strong capability across both front-end and back-end engineering, demonstrating versatility and a willingness to take on whatever the team needed. She consistently approached her work with thoughtfulness and curiosity—asking insightful questions when working with product managers to ensure a deep understanding of requirements and a clear path to execution. Beyond her technical skills, Ananya is a culture leader. She actively planned team outings and played a key role in building a positive, inclusive, and connected team environment. Her energy, initiative, and focus on team morale made a lasting impact. Ananya is self-motivated, career-focused, and a natural collaborator. I&apos;m excited to see where her career takes her and highly recommend her to any team looking for a talented, adaptable, and inspiring engineer.",
+                date: "2025"
+              },
+              {
+                name: "Hepcibha Addakula",
+                role: "Principal Engineering Manager", 
+                company: "Microsoft",
+                text: "Working with Ananya has been an absolute pleasure. A fresh breath of energy on the team, she brings curiosity, focus, and unwavering commitment to everything she does. From quickly ramping up on complex projects to leading inclusive team events as part of the morale committee, Ananya consistently delivers with impact. She even mentored an intern gracefully while staying on top of her own commitments. Ananya shows strong ownership across initiatives and is always eager to learn from others, embracing diverse perspectives with respect. Even under challenging conditions, she meets deadlines with urgency and grace. A fantastic teammate and a rising star!",
+                date: "2025"
+              },
+              {
+                name: "Jayalakshmi Karanam",
+                role: "Principal Software Engineer",
+                company: "Microsoft", 
+                text: "Collaborating with Ananya has been a truly rewarding experience. She is curious and determined. Her insightful questions regularly uncover blind spots, highlight opportunities for improvement, and bring fresh perspectives that challenge established ways of thinking in a productive and thoughtful manner. Ananya swiftly mastered Azure Data Factory and seamlessly took over my responsibilities in my absence, demonstrating exceptional ownership and adaptability. Her technical proficiency, willingness to learn, and strong problem-solving skills make her a dependable and highly effective team member. Without hesitation, I wholeheartedly recommend Ananya for a software engineer position. She would be an invaluable asset to any organization.",
+                date: "2025"
+              }
+            ].map((rec, index) => (
+              <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105">
+                <div className="mb-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-purple-400">{rec.name}</h3>
+                    <span className="text-sm text-gray-400">{rec.date}</span>
+                  </div>
+                  <p className="text-sm text-gray-300 mb-1">{rec.role}</p>
+                  <p className="text-sm text-purple-300">{rec.company}</p>
+                </div>
+                
+                <blockquote className="text-gray-300 italic leading-relaxed text-sm">
+                  &quot;{rec.text}&quot;
+                </blockquote>
+              </div>
+            ))}
           </div>
           
-          <blockquote className="text-gray-300 italic leading-relaxed text-sm">
-            "{rec.text}"
-          </blockquote>
+          <div className="text-center">
+            <a 
+              href="https://www.linkedin.com/in/ananya-barthakur1/details/recommendations/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+            >
+              <Linkedin size={20} className="mr-2" />
+              View All Recommendations on LinkedIn
+            </a>
+          </div>
         </div>
-      ))}
-    </div>
-    
-    <div className="text-center">
-      <a 
-        href="https://www.linkedin.com/in/ananya-barthakur1/details/recommendations/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
-      >
-        <Linkedin size={20} className="mr-2" />
-        View All Recommendations on LinkedIn
-      </a>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Blog Section */}
-      <section id="blog" className="py-20 px-4">
+      <section id="blog" className="py-20 px-4 bg-black/20">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -647,12 +645,12 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Let's Connect
+              Let&apos;s Connect
             </span>
           </h2>
           
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            I'm always excited to collaborate on new projects and bring ideas to life. 
+            I&apos;m always excited to collaborate on new projects and bring ideas to life.
           </p>
           
           <div className="text-xl text-gray-300 mb-8">
@@ -697,7 +695,7 @@ export default function Home() {
       <footer className="py-8 px-4 border-t border-white/10 bg-black/20">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-400">
-            © 2025 Ananya Barthakur. 
+            © 2025 Ananya Barthakur.
           </p>
         </div>
       </footer>
