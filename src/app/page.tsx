@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Menu, X, ChevronDown, Calendar, MapPin, Briefcase, Award, Code, Brain, Database, Users } from 'lucide-react';
-
+import { Github, Linkedin, Mail, Menu, X, ChevronDown, Calendar, MapPin, Award, Code, Brain, Database, Users } from 'lucide-react';
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -307,7 +306,7 @@ export default function Home() {
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
-              {['home', 'about', 'experience', 'projects', 'skills', 'blog', 'contact'].map((section) => (
+              {['home', 'about', 'experience', 'projects', 'skills', 'recommendations', 'blog', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -334,7 +333,7 @@ export default function Home() {
         {isMenuOpen && (
           <div className="md:hidden bg-black/90 backdrop-blur-md">
             <div className="px-4 py-2 space-y-2">
-              {['home', 'about', 'experience', 'projects', 'skills', 'blog', 'contact'].map((section) => (
+              {['home', 'about', 'experience', 'projects', 'skills', 'recommendations', 'blog', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
