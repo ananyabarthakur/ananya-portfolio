@@ -20,7 +20,7 @@ export default function Home() {
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'projects', 'skills', 'recommendations', 'blog', 'contact'];
+      const sections = ['home', 'about', 'experience', 'projects', 'skills', 'education','recommendations', 'blog', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -301,13 +301,12 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-black/20 backdrop-blur-md z-40 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-
+            <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">                   
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
-              {['home', 'about', 'experience', 'projects', 'skills', 'recommendations', 'blog', 'contact'].map((section) => (
+           <div className="hidden md:flex space-x-8 ml-auto pr-8">
+              {['home', 'about', 'experience', 'projects', 'skills', 'education', 'recommendations', 'blog', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -334,7 +333,7 @@ export default function Home() {
         {isMenuOpen && (
           <div className="md:hidden bg-black/90 backdrop-blur-md">
             <div className="px-4 py-2 space-y-2">
-              {['home', 'about', 'experience', 'projects', 'skills', 'recommendations', 'blog', 'contact'].map((section) => (
+              {['home', 'about', 'experience', 'projects', 'skills', 'education','recommendations', 'blog', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -543,6 +542,24 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Education Section */}
+      <section id="education" className="py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Education
+            </span>
+          </h2>
+
+    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300">
+      <h3 className="text-2xl font-bold text-purple-400 mb-2">Boston College</h3>
+      <p className="text-xl font-semibold text-white">B.Sc. in Computer Science & Philosophy</p>
+      <p className="text-base text-gray-400">Graduated 2023</p>
+      <p className="text-base text-white mt-2">NCAA Division I Golfer</p>
+      <p className="text-base text-white mt-1">Standardized Testing: SAT 1540</p>
+    </div>
+  </div>
+</section>
 
       {/* Recommendations Section */}
       <section id="recommendations" className="py-20 px-4">
