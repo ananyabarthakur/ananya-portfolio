@@ -354,14 +354,13 @@ export default function Home() {
           <div className="mb-8">
             <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 p-1">
               <div 
-                className="w-full h-full rounded-full bg-slate-800 bg-cover bg-center flex items-center justify-center text-4xl font-bold"
+                className="w-full h-full rounded-full bg-slate-800 bg-cover bg-center"
                 style={{
                   backgroundImage: 'url(/profile.jpeg)',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }}
               >
-                AB
               </div>
             </div>
           </div>
