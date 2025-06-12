@@ -375,7 +375,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-6 relative z-10">
+      <section id="home" className="min-h-screen flex items-center justify-center px-6  pt-20 relative z-10">
         <div className="text-center max-w-5xl mx-auto">
           <div className="mb-16">
             <div className="w-32 h-32 mx-auto mb-12 rounded-full bg-gradient-to-b from-emerald-400/20 to-transparent p-0.5 relative group">
