@@ -142,8 +142,7 @@ export default function Home() {
         "Built full-stack web application using Django framework with PostgreSQL database",
         "Implemented secure user authentication and role-based access control",
         "Designed administrative dashboard for faculty to review and manage TA applications",
-        "Created responsive frontend with dynamic forms and real-time application status updates",
-        "Deployed application with proper security measures and data validation"
+        "Created responsive frontend with dynamic forms and real-time application status updates"
       ],
       tech: ["Django", "Python", "PostgreSQL", "HTML/CSS", "JavaScript"]
     }
