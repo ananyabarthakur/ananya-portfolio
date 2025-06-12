@@ -1,12 +1,22 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Menu, X, ChevronDown, Calendar, MapPin, Award, Code, Brain, Database, Users } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X, ChevronDown, Calendar, MapPin, Award, Code, Brain, Database, Users, ArrowRight, ExternalLink } from 'lucide-react';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [showBlogPost, setShowBlogPost] = useState<string | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Mouse tracking for subtle cursor effects
+  useEffect(() => {
+    const handleMouseMove = (e: { clientX: any; clientY: any; }) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // Smooth scrolling navigation
   const scrollToSection = (sectionId: string) => {
@@ -141,24 +151,24 @@ export default function Home() {
 
   const skillCategories = [
     {
-      icon: <Code className="w-6 h-6" />,
+      icon: <Code className="w-5 h-5" />,
       title: "Frontend Development",
       skills: ["React", "TypeScript", "JavaScript", "HTML/CSS", "Redux", "Fluent UI", "Tailwind CSS"]
     },
     {
-      icon: <Database className="w-6 h-6" />,
+      icon: <Database className="w-5 h-5" />,
       title: "Backend & Cloud",
       skills: [".NET", "C#", "Node.js", "Azure Functions", "CosmosDB", "REST APIs", "Azure Infrastructure"]
     },
     {
-      icon: <Brain className="w-6 h-6" />,
+      icon: <Brain className="w-5 h-5" />,
       title: "AI & Machine Learning",
       skills: ["OpenAI API", "Computer Vision", "NLP", "Python", "PyTorch", "Scikit-learn", "Data Analysis"]
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="w-5 h-5" />,
       title: "Tools & Databases",
-      skills: ["Git", "SQL", "Django", "Azure DevOps", "Docker", "JSON Schema", "RESTful Services"]
+      skills: ["Git", "SQL", "Django", "Azure DevOps", "JSON Schema", "RESTful Services"]
     }
   ];
 
@@ -192,8 +202,8 @@ export default function Home() {
             <p className="mb-6">During my research with Dr. Jean-Baptiste Tristan, I implemented a custom Hartree-Fock solver to gain deep insight into the underlying mathematics and computational challenges. This project bridges the gap between theoretical quantum mechanics and practical software engineering.</p>
             
             <h2 className="text-2xl font-bold text-white mb-4">Key Technical Challenges</h2>
-            <div className="bg-slate-800 rounded-lg p-6 mb-6">
-              <h3 className="text-lg font-semibold text-purple-400 mb-3">Numerical Stability</h3>
+            <div className="bg-slate-800/50 rounded-2xl p-6 mb-6 border border-slate-700">
+              <h3 className="text-lg font-semibold text-emerald-400 mb-3">Numerical Stability</h3>
               <p className="text-sm text-gray-300">The orthogonalization step using S^(-1/2) requires careful handling of near-linear dependencies in the basis set. I used symmetric orthogonalization to maintain numerical stability.</p>
             </div>
             
@@ -232,8 +242,8 @@ export default function Home() {
             </ul>
             
             <h2 className="text-2xl font-bold text-white mb-4">Technical Implementation</h2>
-            <div className="bg-slate-800 rounded-lg p-6 mb-6">
-              <h3 className="text-lg font-semibold text-purple-400 mb-3">Deep Learning Architectures</h3>
+            <div className="bg-slate-800/50 rounded-2xl p-6 mb-6 border border-slate-700">
+              <h3 className="text-lg font-semibold text-emerald-400 mb-3">Deep Learning Architectures</h3>
               <p className="text-sm text-gray-300 mb-3">I implemented and compared multiple state-of-the-art segmentation architectures:</p>
               <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
                 <li><strong>U-Net:</strong> Excellent for biomedical segmentation with skip connections</li>
@@ -266,15 +276,15 @@ export default function Home() {
     if (!post) return null;
 
     return (
-      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto">
+      <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 overflow-y-auto overscroll-behavior-contain">
         <div className="min-h-screen py-8 px-4">
-          <div className="max-w-4xl mx-auto bg-slate-900 rounded-xl border border-purple-500/20">
+          <div className="max-w-4xl mx-auto bg-slate-900/95 backdrop-blur-xl rounded-3xl border border-slate-700/50 shadow-2xl">
             <div className="p-8">
               <div className="flex justify-between items-start mb-8">
-                <h1 className="text-3xl font-bold text-white">{post.title}</h1>
+                <h1 className="text-3xl font-bold text-white pr-8">{post.title}</h1>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-800 rounded-xl transition-colors flex-shrink-0"
                 >
                   <X size={24} className="text-gray-400" />
                 </button>
@@ -283,7 +293,7 @@ export default function Home() {
               <div className="mt-8 pt-6 border-t border-slate-700">
                 <button
                   onClick={onClose}
-                  className="px-6 py-3 bg-purple-500 hover:bg-purple-600 rounded-lg font-semibold transition-colors"
+                  className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg"
                 >
                   ← Back to Blog
                 </button>
@@ -296,49 +306,65 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-600 via-purple-700 to-slate-800 text-white">
+    <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
+      {/* Subtle gradient overlay */}
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-900/50 via-transparent to-slate-900/50 pointer-events-none" />
+      
+      {/* Cursor glow effect */}
+      <div 
+        className="fixed w-96 h-96 pointer-events-none opacity-20 rounded-full blur-3xl transition-all duration-300 ease-out z-0"
+        style={{
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
+          left: mousePosition.x - 192,
+          top: mousePosition.y - 192,
+        }}
+      />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/20 backdrop-blur-md z-40 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">                   
+      <nav className="fixed top-0 w-full bg-slate-950/80 backdrop-blur-xl z-40 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="text-xl font-bold text-emerald-400">
+              AB
             </div>
             
             {/* Desktop Navigation */}
-           <div className="hidden md:flex space-x-8 ml-auto pr-8">
+           <div className="hidden md:flex space-x-8">
               {['home', 'about', 'experience', 'projects', 'skills', 'education', 'recommendations', 'blog', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className={`capitalize transition-colors duration-200 hover:text-purple-400 ${
-                    activeSection === section ? 'text-purple-400' : 'text-white'
+                  className={`capitalize transition-all duration-300 hover:text-emerald-400 relative group ${
+                    activeSection === section ? 'text-emerald-400' : 'text-gray-400'
                   }`}
                 >
                   {section}
+                  <span className={`absolute -bottom-1 left-0 w-full h-px bg-emerald-400 transform transition-transform origin-left ${
+                    activeSection === section ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`} />
                 </button>
               ))}
             </div>
 
             {/* Mobile Navigation Button */}
             <button
-              className="md:hidden"
+              className="md:hidden p-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-black/90 backdrop-blur-md">
-            <div className="px-4 py-2 space-y-2">
+          <div className="md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-slate-800">
+            <div className="px-6 py-4 space-y-1">
               {['home', 'about', 'experience', 'projects', 'skills', 'education','recommendations', 'blog', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className="block w-full text-left py-2 capitalize hover:text-purple-400 transition-colors"
+                  className="block w-full text-left py-3 px-4 capitalize hover:text-emerald-400 hover:bg-slate-800/50 rounded-xl transition-all duration-300 text-gray-400"
                 >
                   {section}
                 </button>
@@ -349,116 +375,140 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-4">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 p-1">
+      <section id="home" className="min-h-screen flex items-center justify-center px-6 relative z-10">
+        <div className="text-center max-w-5xl mx-auto">
+          <div className="mb-16">
+            <div className="w-32 h-32 mx-auto mb-12 rounded-full bg-gradient-to-b from-emerald-400/20 to-transparent p-0.5 relative group">
               <div 
-                className="w-full h-full rounded-full bg-slate-800 bg-cover bg-center"
+                className="w-full h-full rounded-full bg-slate-800 bg-cover bg-center relative overflow-hidden"
                 style={{
                   backgroundImage: 'url(/profile.jpeg)',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }}
               >
+                <div className="absolute inset-0 rounded-full bg-gradient-to-t from-slate-900/40 to-transparent" />
               </div>
+              <div className="absolute -inset-4 rounded-full bg-emerald-400/5 blur-xl group-hover:bg-emerald-400/10 transition-all duration-700" />
             </div>
           </div>
           
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-            Ananya Barthakur
-            </span>
+          <h1 className="text-6xl md:text-6xl font-light mb-8 tracking-tight">
+            <span className="text-white">Ananya</span>
+            <br />
+            <span className="text-gray-400">Barthakur</span>
           </h1>
           
-        <p className="text-2xl md:text-3xl text-purple-300 mb-8 font-semibold">
-          Software Engineer
-        </p>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Full-Stack Engineer, specializing in front end architecture, distributed systems and AI integration.
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <div className="h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent flex-1 max-w-24" />
+            <p className="text-xl text-emerald-400 font-medium tracking-wider uppercase">
+              Software Engineer
+            </p>
+            <div className="h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent flex-1 max-w-24" />
+          </div>
+          
+          <p className="text-xl text-gray-400 mb-16 leading-relaxed max-w-3xl mx-auto font-light">
+            Full-Stack Engineer specializing in scalable architectures, distributed systems, and AI integration. 
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
             <button
               onClick={() => scrollToSection('experience')}
-              className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+              className="group px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25"
             >
-              View My Work
+              <span className="flex items-center justify-center gap-2">
+                View My Work
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="px-8 py-3 border-2 border-purple-400 rounded-full font-semibold hover:bg-purple-400 hover:text-black transition-all duration-300"
+              className="group px-8 py-4 border border-slate-700 hover:border-emerald-400 text-gray-300 hover:text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 backdrop-blur-sm bg-slate-800/20 hover:bg-slate-800/40"
             >
-              Get In Touch
+              <span className="flex items-center justify-center gap-2">
+                Get In Touch
+                <Mail className="w-4 h-4" />
+              </span>
             </button>
           </div>
 
           <div className="flex justify-center space-x-6">
-            <a href="mailto:ananyabarthakur1@gmail.com" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110">
-              <Mail size={24} />
-            </a>
-            <a href="https://www.linkedin.com/in/ananya-barthakur1/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110">
-              <Linkedin size={24} />
-            </a>
-            <a href="https://github.com/ananyabarthakur" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110">
-              <Github size={24} />
-            </a>
+            {[
+              { icon: Mail, href: "mailto:ananyabarthakur1@gmail.com", label: "Email" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/ananya-barthakur1/", label: "LinkedIn" },
+              { icon: Github, href: "https://github.com/ananyabarthakur", label: "GitHub" }
+            ].map(({ icon: Icon, href, label }, index) => (
+              <a 
+                key={index}
+                href={href} 
+                target={href.startsWith('mailto') ? undefined : "_blank"}
+                rel="noopener noreferrer" 
+                className="group p-3 bg-slate-800/30 hover:bg-slate-700/50 rounded-xl transition-all duration-300 hover:scale-110 hover:-translate-y-1 border border-slate-700/50 hover:border-slate-600"
+                aria-label={label}
+              >
+                <Icon size={20} className="text-gray-400 group-hover:text-emerald-400 transition-colors" />
+              </a>
+            ))}
           </div>
 
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <ChevronDown size={32} className="text-purple-400" />
+            <ChevronDown size={24} className="text-gray-600" />
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              About Me
-            </span>
-          </h2>
+      <section id="about" className="py-32 px-6 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
+              About
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
+          </div>
           
-          <p className="text-lg text-gray-300 leading-relaxed">
-            Hi! I&apos;m Ananya, a full-stack software engineer with 2+ years of experience at Microsoft, specializing in scalable web applications and AI integration. I have a passion for creating solutions that bridge the gap between complex technology and intuitive user experiences. My expertise spans from developing high-performance backend systems serving billions of requests to crafting engaging frontend interfaces and integrating cutting-edge AI capabilities.
-          </p>
+          <div className="bg-slate-900/30 backdrop-blur-xl rounded-3xl p-12 border border-slate-800/50">
+            <p className="text-lg text-gray-300 leading-relaxed text-center">
+              I'm a full-stack software engineer with 2+ years of experience at Microsoft, where I specialize in building scalable web applications and integrating AI technologies. My passion lies in creating elegant solutions that bridge complex technical systems with intuitive user experiences. From high-performance backend architectures serving billions of requests to modern frontend interfaces powered by cutting-edge AI, I focus on building software that makes a meaningful impact.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 px-4 bg-black/20">
+      <section id="experience" className="py-32 px-6 bg-slate-900/20 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Professional Experience
-            </span>
-          </h2>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
+              Experience
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
+          </div>
           
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-purple-400/50 transition-all duration-300">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-purple-400 mb-2">{exp.company}</h3>
-                    <p className="text-xl font-semibold text-white">{exp.role}</p>
+              <div key={index} className="group bg-slate-900/40 backdrop-blur-xl rounded-3xl p-10 border border-slate-800/50 hover:border-slate-700 transition-all duration-500 hover:bg-slate-900/60">
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-8">
+                  <div className="mb-4 lg:mb-0">
+                    <h3 className="text-2xl font-semibold text-emerald-400 mb-2">{exp.company}</h3>
+                    <p className="text-xl text-white font-medium">{exp.role}</p>
                   </div>
-                  <div className="text-right text-gray-300 mt-2 md:mt-0">
-                    <div className="flex items-center justify-end mb-1">
-                      <MapPin size={16} className="mr-1" />
-                      {exp.location}
+                  <div className="text-right text-gray-400 space-y-1">
+                    <div className="flex items-center lg:justify-end gap-2 text-sm">
+                      <MapPin size={14} />
+                      <span>{exp.location}</span>
                     </div>
-                    <div className="flex items-center justify-end">
-                      <Calendar size={16} className="mr-1" />
-                      {exp.period}
+                    <div className="flex items-center lg:justify-end gap-2 text-sm">
+                      <Calendar size={14} />
+                      <span>{exp.period}</span>
                     </div>
                   </div>
                 </div>
                 
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   {exp.achievements.map((achievement, achieveIndex) => (
-                    <li key={achieveIndex} className="text-gray-300 flex items-start">
-                      <span className="text-purple-400 mr-3 mt-1">•</span>
+                    <li key={achieveIndex} className="text-gray-300 flex items-start text-sm leading-relaxed">
+                      <span className="text-emerald-400 mr-4 mt-1 text-xs">▸</span>
                       <span dangerouslySetInnerHTML={{ __html: achievement.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
                     </li>
                   ))}
@@ -470,71 +520,41 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4">
+      <section id="projects" className="py-32 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
               Projects
-            </span>
-          </h2>
-          
-          <div className="space-y-12">
-            {projects.map((project, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-purple-400/50 transition-all duration-300">
-                <div className="p-8">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-purple-400 mb-3">{project.title}</h3>
-                    <p className="text-gray-300 mb-4 leading-relaxed">{project.description}</p>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <h4 className="text-lg font-semibold text-white mb-3">Key Features:</h4>
-                    <ul className="space-y-2">
-                      {project.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="text-gray-300 flex items-start">
-                          <span className="text-purple-400 mr-3 mt-1">•</span>
-                          <span dangerouslySetInnerHTML={{ __html: detail.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, techIndex) => (
-                      <span key={techIndex} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
           </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 bg-black/20">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Technical Skills
-            </span>
-          </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skillCategories.map((category, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105">
-                <div className="flex items-center mb-4">
-                  <div className="p-2 bg-purple-500/20 rounded-lg mr-3">
-                    {category.icon}
+          <div className="grid gap-8">
+            {projects.map((project, index) => (
+              <div key={index} className="group bg-slate-900/40 backdrop-blur-xl rounded-3xl p-10 border border-slate-800/50 hover:border-slate-700 transition-all duration-500 hover:bg-slate-900/60">
+                <div className="mb-8">
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-2xl font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors">{project.title}</h3>
                   </div>
-                  <h3 className="text-lg font-semibold text-white">{category.title}</h3>
+                  <p className="text-gray-300 leading-relaxed">{project.description}</p>
                 </div>
+                
+                <div className="mb-8">
+                  <h4 className="text-lg font-medium text-white mb-4">Key Features</h4>
+                  <ul className="space-y-3">
+                    {project.details.map((detail, detailIndex) => (
+                      <li key={detailIndex} className="text-gray-300 flex items-start text-sm leading-relaxed">
+                        <span className="text-emerald-400 mr-4 mt-1 text-xs">▸</span>
+                        <span dangerouslySetInnerHTML={{ __html: detail.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <span key={skillIndex} className="text-sm text-gray-300 bg-slate-800/50 px-2 py-1 rounded">
-                      {skill}
+                  {project.tech.map((tech, techIndex) => (
+                    <span key={techIndex} className="px-3 py-1 bg-slate-800/60 text-gray-300 rounded-lg text-xs border border-slate-700/50">
+                      {tech}
                     </span>
                   ))}
                 </div>
@@ -543,35 +563,76 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Education Section */}
-      <section id="education" className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Education
-            </span>
-          </h2>
 
-    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300">
-      <h3 className="text-2xl font-bold text-purple-400 mb-2">Boston College</h3>
-      <p className="text-xl font-semibold text-white">B.Sc. in Computer Science & Philosophy</p>
-      <p className="text-base text-gray-400">Graduated 2023</p>
-      <p className="text-base text-white mt-2">NCAA Division I Golfer</p>
-      <p className="text-base text-white mt-1">Standardized Testing: SAT 1540</p>
-    </div>
-  </div>
-</section>
+      {/* Skills Section */}
+      <section id="skills" className="py-32 px-6 bg-slate-900/20 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
+              Technical Skills
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {skillCategories.map((category, index) => (
+              <div key={index} className="group bg-slate-900/40 backdrop-blur-xl rounded-2xl p-8 border border-slate-800/50 hover:border-slate-700 transition-all duration-500 hover:bg-slate-900/60">
+                <div className="flex items-center mb-4">
+                  <div className="p-2 bg-emerald-500/10 rounded-xl mr-4 border border-emerald-500/20">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-lg font-medium text-white">{category.title}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div key={skillIndex} className="text-sm text-gray-400 bg-slate-800/30 px-3 py-2 rounded-lg border border-slate-700/30">
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-32 px-6 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
+              Education
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
+          </div>
+
+          <div className="bg-slate-900/40 backdrop-blur-xl rounded-3xl p-10 border border-slate-800/50">
+            <h3 className="text-2xl font-semibold text-emerald-400 mb-4">Boston College</h3>
+            <p className="text-xl text-white mb-2">B.Sc. in Computer Science & Philosophy</p>
+            <p className="text-gray-400 mb-6">Graduated 2023</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <span className="px-4 py-2 bg-slate-800/60 text-gray-300 rounded-xl border border-slate-700/50 text-sm">
+                🏌️ NCAA Division I Golfer
+              </span>
+              <span className="px-4 py-2 bg-slate-800/60 text-gray-300 rounded-xl border border-slate-700/50 text-sm">
+                📊 SAT 1540
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Recommendations Section */}
-      <section id="recommendations" className="py-20 px-4">
+      <section id="recommendations" className="py-32 px-6 bg-slate-900/20 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
               Recommendations
-            </span>
-          </h2>
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
+          </div>
           
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {[
               {
                 name: "Denise Architetto",
@@ -595,18 +656,18 @@ export default function Home() {
                 date: "2025"
               }
             ].map((rec, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105">
-                <div className="mb-4">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-purple-400">{rec.name}</h3>
-                    <span className="text-sm text-gray-400">{rec.date}</span>
+              <div key={index} className="group bg-slate-900/40 backdrop-blur-xl rounded-2xl p-8 border border-slate-800/50 hover:border-slate-700 transition-all duration-500 hover:bg-slate-900/60">
+                <div className="mb-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-lg font-semibold text-emerald-400">{rec.name}</h3>
+                    <span className="text-xs text-gray-500 bg-slate-800/60 px-2 py-1 rounded border border-slate-700/50">{rec.date}</span>
                   </div>
-                  <p className="text-sm text-gray-300 mb-1">{rec.role}</p>
-                  <p className="text-sm text-purple-300">{rec.company}</p>
+                  <p className="text-sm text-gray-400 mb-1">{rec.role}</p>
+                  <p className="text-sm text-emerald-400/80 font-medium">{rec.company}</p>
                 </div>
                 
-                <blockquote className="text-gray-300 italic leading-relaxed text-sm">
-                  &quot;{rec.text}&quot;
+                <blockquote className="text-gray-300 italic  leading-relaxed text-sm">
+                  "{rec.text}"
                 </blockquote>
               </div>
             ))}
@@ -617,42 +678,47 @@ export default function Home() {
               href="https://www.linkedin.com/in/ananya-barthakur1/details/recommendations/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+              className="group inline-flex items-center px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-medium transition-all duration-300 transform hover:scale-105"
             >
-              <Linkedin size={20} className="mr-2" />
-              View All Recommendations on LinkedIn
+              <Linkedin size={18} className="mr-3" />
+              View All Recommendations
+              <ExternalLink size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>
       </section>
 
       {/* Blog Section */}
-      <section id="blog" className="py-20 px-4 bg-black/20">
+      <section id="blog" className="py-32 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
               Blog
-            </span>
-          </h2>
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
+          </div>
           
           <div className="grid md:grid-cols-2 gap-8">
             {blogPosts.map((post, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 cursor-pointer"
+              <div key={index} className="group bg-slate-900/40 backdrop-blur-xl rounded-2xl p-8 border border-slate-800/50 hover:border-slate-700 transition-all duration-500 hover:bg-slate-900/60 cursor-pointer"
                    onClick={() => setShowBlogPost(post.id)}>
-                <div className="text-sm text-purple-400 mb-3">{post.date}</div>
-                <h3 className="text-xl font-bold text-white mb-3">{post.title}</h3>
-                <p className="text-gray-300 mb-4 leading-relaxed">{post.excerpt}</p>
+                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                  <span>{post.date}</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-emerald-400 transition-colors leading-tight">{post.title}</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed text-sm">{post.excerpt}</p>
                 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {post.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
+                    <span key={tagIndex} className="px-3 py-1 bg-slate-800/60 text-gray-400 rounded-lg text-xs border border-slate-700/50">
                       {tag}
                     </span>
                   ))}
                 </div>
                 
-                <div className="text-purple-400 font-semibold hover:text-purple-300 transition-colors">
-                  Read More →
+                <div className="flex items-center text-emerald-400 font-medium group-hover:text-emerald-300 transition-colors text-sm">
+                  Read Article
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             ))}
@@ -661,61 +727,67 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4">
+      <section id="contact" className="py-32 px-6 bg-slate-900/20 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Let&apos;s Connect
-            </span>
-          </h2>
-          
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            I&apos;m always excited to collaborate on new projects and bring ideas to life.
-          </p>
-          
-          <div className="text-xl text-gray-300 mb-8">
-            <Mail className="inline mr-2" size={20} />
-            ananyabarthakur1@gmail.com
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 text-white">
+              Contact
+            </h2>
+            <div className="w-20 h-px bg-emerald-400 mx-auto" />
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a 
-              href="mailto:ananyabarthakur1@gmail.com"
-              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
-            >
-              <Mail size={20} className="mr-2" />
-              Send me an email
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/ananya-barthakur1/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 border-2 border-purple-400 rounded-full font-semibold hover:bg-purple-400 hover:text-black transition-all duration-300 flex items-center justify-center"
-            >
-              <Linkedin size={20} className="mr-2" />
-              Connect on LinkedIn
-            </a>
+          <div className="bg-slate-900/40 backdrop-blur-xl rounded-3xl p-12 border border-slate-800/50 mb-12">
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              Let's collaborate on something amazing
+            </p>
+            
+            <div className="text-lg text-gray-300 mb-10 flex items-center justify-center gap-3">
+              <Mail className="text-emerald-400" size={20} />
+              <span>ananyabarthakur1@gmail.com</span>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a 
+                href="mailto:ananyabarthakur1@gmail.com"
+                className="group px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+              >
+                <Mail size={18} className="mr-3" />
+                Send Email
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/ananya-barthakur1/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-8 py-4 border border-slate-700 hover:border-emerald-400 text-gray-300 hover:text-white rounded-xl font-medium transition-all duration-300 transform hover:scale-105 backdrop-blur-sm bg-slate-800/20 hover:bg-slate-800/40 flex items-center justify-center"
+              >
+                <Linkedin size={18} className="mr-3" />
+                Connect
+                <ExternalLink size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
           </div>
           
-          <div className="mt-8">
+          <div className="text-center">
             <a 
               href="https://www.linkedin.com/in/ananya-barthakur1/details/recommendations/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-400 hover:text-purple-300 transition-colors font-medium"
+              className="group text-emerald-400 hover:text-emerald-300 transition-colors font-medium flex items-center justify-center gap-2"
             >
-              <Award className="inline mr-2" size={16} />
-              View Professional Recommendations on LinkedIn
+              <Award size={16} />
+              Professional Recommendations
+              <ExternalLink size={14} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-white/10 bg-black/20">
+      <footer className="py-16 px-6 border-t border-slate-800 bg-slate-900/30 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-400">
-            © 2025 Ananya Barthakur.
+          <p className="text-gray-500">
+            © 2025 Ananya Barthakur
           </p>
         </div>
       </footer>
