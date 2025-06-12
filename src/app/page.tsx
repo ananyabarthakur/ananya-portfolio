@@ -181,7 +181,7 @@ export default function Home() {
     },
     {
       id: "tnbc-segmentation",
-      title: "Deep Learning for Breast Cancer Nuclei Segmentation: A Computer Vision Approach",
+      title: "Deep Learning for Nuclei Segmentation: A Computer Vision Approach",
       date: "March 2025",
       excerpt: "Exploring CNN and RNN architectures for automated tumor characteristic identification in Triple Negative Breast Cancer research.",
       tags: ["Computer Vision", "Deep Learning", "Medical Imaging"]
@@ -225,7 +225,7 @@ export default function Home() {
         )
       },
       "tnbc-segmentation": {
-        title: "Deep Learning for Breast Cancer Nuclei Segmentation",
+        title: "Deep Learning for Nuclei Segmentation",
         content: (
           <div className="prose prose-lg max-w-none text-gray-300">
             <h2 className="text-2xl font-bold text-white mb-4">The Challenge of Breast Cancer Diagnosis</h2>
