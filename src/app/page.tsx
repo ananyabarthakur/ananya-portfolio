@@ -301,10 +301,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full bg-black/20 backdrop-blur-md z-40 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Ananya Barthakur
-            </div>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               {['home', 'about', 'experience', 'projects', 'skills', 'recommendations', 'blog', 'contact'].map((section) => (
@@ -365,14 +362,17 @@ export default function Home() {
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-              Software Engineer
-            </span>
-          </h1>
-          
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+            Ananya Barthakur
+          </span>
+        </h1>
+
+        <p className="text-2xl md:text-3xl text-purple-300 mb-8 font-semibold">
+          Software Engineer
+        </p>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Full-Stack Engineer, specializing in scalable web applications and AI integration
+            Full-Stack Engineer, specializing in front end architecture, distributed systems and AI integration.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
