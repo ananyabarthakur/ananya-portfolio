@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Ananya Barthakur | Portfolio',
-  description: 'Full-Stack Developer with 2+ years at Microsoft',
+  description: 'Full-Stack Engineer',
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>",
   },
