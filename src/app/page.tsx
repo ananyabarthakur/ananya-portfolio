@@ -167,7 +167,7 @@ export default function Home() {
       id: "hartree-fock",
       title: "Building a Hartree-Fock Solver: From Quantum Theory to Python Code",
       date: "December 2024",
-      excerpt: "A deep dive into implementing quantum chemistry&apos;s fundamental algorithm and its real-world applications in molecular modeling.",
+      excerpt: "A deep dive into implementing a fundamental algorithmn in quantum chemistry and its real-world applications in molecular modeling.",
       tags: ["Quantum Chemistry", "Python", "Scientific Computing"]
     },
     {
