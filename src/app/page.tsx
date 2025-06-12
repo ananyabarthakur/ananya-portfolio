@@ -71,7 +71,7 @@ export default function Home() {
       location: "Boston, MA",
       period: "May 2021 – May 2022",
       achievements: [
-        "Developed ML models predicting compound solubility from cheminformatics datasets (10,000+ molecules) with R² > 0.95 accuracy",
+        "Developed ML models predicting compound solubility from cheminformatics datasets (10,000+ molecules) with R² greater than 0.95  accuracy",
         "Implemented feature selection using Lasso regression to identify impactful chemical descriptors and reduce model complexity",
         "Designed modular ML pipeline with cross-validation, hyperparameter tuning, and comprehensive performance metrics",
         "Collaborated with research team to integrate predictive models into computational chemistry workflows"
@@ -108,7 +108,7 @@ export default function Home() {
       description: "Developed CNN and RNN models for breast cancer tissue analysis, enabling automated identification of tumor characteristics in TNBC research.",
       details: [
         "Implemented U-Net and FCN architectures for nuclei segmentation in histopathological images",
-        "Achieved >90% accuracy in identifying cancer nuclei morphology and characteristics",
+        "Achieved greater than  90% accuracy in identifying cancer nuclei morphology and characteristics",
         "Built comprehensive data augmentation pipeline for medical imaging robustness",
         "Designed custom loss functions combining Dice loss and boundary loss for precise segmentation"
       ],
@@ -253,7 +253,7 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-white mb-4">Results and Performance</h2>
             <p className="mb-4">Based on my experiments with standard biomedical segmentation metrics:</p>
             <ul className="list-disc list-inside text-gray-300 space-y-2">
-              <li><strong>U-Net with ResNet Encoder:</strong> Achieved best overall performance with AJI > 0.50</li>
+              <li><strong>U-Net with ResNet Encoder:</strong> Achieved best overall performance with AJI greater than 0.50</li>
               <li><strong>Data Augmentation Impact:</strong> Improved generalization by 15-20% across all metrics</li>
               <li><strong>Multi-scale Training:</strong> Enhanced detection of both small and large nuclei</li>
             </ul>

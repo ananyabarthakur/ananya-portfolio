@@ -12,14 +12,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Ananya Barthakur | Portfolio',
-  description: 'Full-Stack Engineer',
+  description: 'Full-Stack Developer with 2+ years at Microsoft',
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>",
   },
 }
-
 export default function RootLayout({
   children,
 }: Readonly<{
