@@ -365,14 +365,14 @@ export default function Home() {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
               Software Engineer
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Full-Stack Developer with 2+ years at Microsoft, specializing in scalable web applications and AI integration
+            Full-Stack Engineer, specializing in scalable web applications and AI integration
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
