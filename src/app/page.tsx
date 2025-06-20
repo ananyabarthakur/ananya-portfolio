@@ -56,7 +56,7 @@ export default function Home() {
       location: "Redmond, WA",
       period: "Jul 2023 – Present",
       achievements: [
-        "AI Integration: Integrated Generative AI into Microsoft&apos;s internal authoring platform, boosting content creation efficiency by 99% across 2B+ support pages",
+        "AI Integration: Integrated Generative AI into Microsoft&apos;s content platform, boosting efficiency by 99% across 2B+ support pages",
         "Frontend Architecture: Modernized frontend with React, Redux, and Fluent UI, migrating legacy systems while ensuring accessibility and performance standards",
         "Schema-Driven Development: Built form-based UI with JSONForms, reducing authoring time by 70% and error rates by 90%",
         "High-Scale Backend Systems: Engineered secure APIs using C#, .NET, Azure Functions, and CosmosDB—serving 15B+ monthly requests with 99.997% uptime",
