@@ -376,21 +376,6 @@ export default function Home() {
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center px-6  pt-20 relative z-10">
         <div className="text-center max-w-5xl mx-auto">
-          <div className="mb-16">
-            <div className="w-32 h-32 mx-auto mb-12 rounded-full bg-gradient-to-b from-emerald-400/20 to-transparent p-0.5 relative group">
-              <div 
-                className="w-full h-full rounded-full bg-slate-800 bg-cover bg-center relative overflow-hidden"
-                style={{
-                  backgroundImage: 'url(/profile.jpeg)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <div className="absolute inset-0 rounded-full bg-gradient-to-t from-slate-900/40 to-transparent" />
-              </div>
-              <div className="absolute -inset-4 rounded-full bg-emerald-400/5 blur-xl group-hover:bg-emerald-400/10 transition-all duration-700" />
-            </div>
-          </div>
           
           <h1 className="text-6xl md:text-6xl font-light mb-8 tracking-tight">
             <span className="text-white">Ananya</span>
