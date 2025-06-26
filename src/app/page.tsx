@@ -91,7 +91,7 @@ export default function Home() {
 
   const projects = [
     {
-      title: "Atelier - Digital Fashion Wardrobe",
+      title: "Atelier - Digital Fashion Wardrobe (WIP)",
       description: "A sophisticated digital fashion wardrobe app for curating clothing collections.",
       details: [
         "Smart Organization: Categorize items by type, color, brand, fabric with advanced filtering capabilities",
