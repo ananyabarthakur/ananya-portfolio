@@ -56,9 +56,9 @@ export default function Home() {
       location: "Redmond, WA",
       period: "Jul 2023 – Present",
       achievements: [
-        "AI Integration: Integrated Generative AI into Microsoft&apos;s content platform, boosting efficiency by 99% across 2B+ support pages",
+        "AI Integration: Integrated Generative AI into Microsoft&apos;s content platform, boosting efficiency by 80% across 2B+ support pages",
         "Frontend Architecture: Modernized frontend with React, Redux, and Fluent UI, migrating legacy systems while ensuring accessibility and performance standards",
-        "Schema-Driven Development: Built form-based UI with JSONForms, reducing authoring time by 70% and error rates by 90%",
+        "Schema-Driven Development: Built form-based UI with JSONForms, reducing authoring time by 40% and structure error rates by 100%",
         "High-Scale Backend Systems: Engineered secure APIs using C#, .NET, Azure Functions, and CosmosDB—serving 15B+ monthly requests with 99.997% uptime",
         "Real-Time Data Pipelines: Led development of metadata pipelines providing system insights for 30+ partner teams, enabling 100% content freshness visibility",
         "DevOps &amp; Infrastructure: Designed secure local development infrastructure with isolated Azure subscriptions and token-based authentication"
@@ -91,6 +91,18 @@ export default function Home() {
 
   const projects = [
     {
+      title: "Atelier - Digital Fashion Wardrobe",
+      description: "A sophisticated digital fashion wardrobe app for curating clothing collections.",
+      details: [
+        "Smart Organization: Categorize items by type, color, brand, fabric with advanced filtering capabilities",
+        "Style Discovery: Browse curated fashion inspiration from celebrities like Kendall Jenner and Hailey Bieber",
+        "Secure Cloud Storage: All items safely stored with user authentication and personal collections",
+        "Elegant Interface: Minimalist, fashion-forward design with responsive layout"
+      ],
+      tech: ["React", "TypeScript", "Supabase", "AI Image Processing", "Responsive Design"],
+      link: "https://www.atelierstyle.com"
+    },
+    {
       title: "PlantPal - AI Plant Care Assistant",
       description: "A React web application that combines computer vision and NLP to help users identify plants and receive personalized care guidance. The app features dual AI integration with offline fallback capabilities.",
       details: [
@@ -100,7 +112,8 @@ export default function Home() {
         "User Experience: Designed intuitive interface with real-time image analysis, confidence scoring, and detailed care instructions",
         "Performance Optimization: Implemented retry logic, error handling, and graceful degradation for enterprise-level reliability"
       ],
-      tech: ["React", "OpenAI API", "Computer Vision", "TypeScript", "Node.js"]
+      tech: ["React", "OpenAI API", "Computer Vision", "TypeScript", "Node.js"],
+      link: "https://github.com/ananyabarthakur/plantpal"
     },
     {
       title: "Hartree-Fock Solver",
@@ -111,7 +124,8 @@ export default function Home() {
         "Achieved numerical stability through symmetric orthogonalization and convergence acceleration",
         "Designed modular architecture for different basis sets and molecular configurations"
       ],
-      tech: ["Python", "NumPy", "Quantum Chemistry", "Scientific Computing"]
+      tech: ["Python", "NumPy", "Quantum Chemistry", "Scientific Computing"],
+      link: "https://github.com/ananyabarthakur/HartreeFock"
     },
     {
       title: "Computer Vision: Biomedical Application",
@@ -122,7 +136,8 @@ export default function Home() {
         "Built comprehensive data augmentation pipeline for medical imaging robustness",
         "Designed custom loss functions combining Dice loss and boundary loss for precise segmentation"
       ],
-      tech: ["PyTorch", "Computer Vision", "Medical Imaging", "Deep Learning"]
+      tech: ["PyTorch", "Computer Vision", "Medical Imaging", "Deep Learning"],
+      link: "https://github.com/ananyabarthakur/breast-cancer-image-segmentation"
     },
     {
       title: "H₂ Potential Energy Surface",
@@ -133,7 +148,8 @@ export default function Home() {
         "Leveraged PyTorch&apos;s automatic differentiation for gradient-based optimization",
         "Achieved high accuracy in predicting molecular configurations and energy landscapes"
       ],
-      tech: ["Python", "PyTorch", "Machine Learning", "Gaussian Processes", "Quantum Chemistry"]
+      tech: ["Python", "PyTorch", "Machine Learning", "Gaussian Processes", "Quantum Chemistry"],
+      link: "https://github.com/ananyabarthakur/quantumChemEnergy"
     },
     {
       title: "TA Application System",
@@ -541,7 +557,20 @@ export default function Home() {
                       {tech}
                     </span>
                   ))}
+                  
                 </div>
+                {project.link && (
+                  <div className="mt-6">
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors text-sm"
+                    >
+                      View Project →
+                    </a>
+                  </div>
+                )}
               </div>
             ))}
           </div>
